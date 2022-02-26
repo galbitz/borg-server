@@ -1,0 +1,13 @@
+---
+- name: Configure webserver
+  hosts: webservers
+  remote_user: root
+  pre_tasks:
+    - name: Update apt repos
+      apt: 
+        update_cache: yes
+        upgrade: 'yes'
+      changed_when: False
+      become: true
+  roles:
+    - webserver

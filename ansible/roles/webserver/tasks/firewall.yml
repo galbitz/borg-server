@@ -1,0 +1,6 @@
+---
+- name: Allow web traffic from the firewall
+  ufw:
+    rule: allow
+    port: "{{ ufw_allow_port }}"
+    proto:  tcp

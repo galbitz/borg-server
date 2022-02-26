@@ -1,0 +1,54 @@
+---
+- name: Install additional npm packages
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items: "{{ npm_pkgs }}"
+
+- name: Clone the required application
+  git:
+    repo: "{{ app_repo }}"
+    dest: "{{ node_app_dir }}"
+    version:  "{{ app_repo_version }}"
+
+- name: Ensure the application directory has proper privileges
+  file:
+    path: "{{ node_app_dir }}"
+    state:  directory
+    mode: '0755'
+    owner:  root
+    group:  root
+
+- name: Setup application dependencies
+  yarn:
+    path: "{{ node_app_dir }}"
+
+- name: Start the application
+  command: 
+    cmd:  "{{ start_app }}"
+  args:
+    chdir: "{{ node_app_dir }}"
+
+- name: Start required services - Reverse Proxy and Firewall
+  service:
+    name: "{{ rp_service }}"
+    state:  started
+    enabled:  yes
+
+- name: Copy custom Reverse Proxy configuration
+  template:
+    src:  "{{ rp_conf_src }}"
+    dest: "{{ rp_conf_dest }}"
+    mode: 0644
+    owner:  root
+    group:  root
+  notify:
+    - restart reverse proxy
+
+- name: Disable the default Reverse Proxy page
+  file:
+    path: "{{ rp_default }}"
+    state:  absent
+  notify:
+    - restart reverse proxy
+

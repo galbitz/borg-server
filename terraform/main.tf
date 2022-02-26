@@ -14,7 +14,7 @@ provider  "linode" {
 }
 
 
-resource  "linode_instance"  "terraform" {
+resource  "linode_instance"  "webserver" {
   image = "linode/ubuntu20.04"
   label = "webserver"
   region = "us-east"

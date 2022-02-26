@@ -1,0 +1,30 @@
+---
+packages:
+  - zsh
+  - htop
+  - tmux
+  - net-tools
+  - mc
+  - git
+  - nginx
+  # - python2
+  # - make
+  # - gcc
+  # - g++
+
+npm_pkgs:  
+  - yarn
+  - pm2
+
+app_repo: https://github.com/ihsanizwer/covid19-dash-sl.git
+app_repo_version: stage
+node_app_dir: /var/www/CovidDash
+#start_app:  forever --minUptime 5000 --spinSleepTime 40000 start -c "npm start" src
+start_app:  pm2 start "yarn start"
+rp_service: nginx
+rp_conf_src:  nginxconf.j2
+rp_conf_dir:  /etc/nginx/conf.d/
+rp_conf_file: rpconf01.conf
+rp_conf_dest: "{{ rp_conf_dir }}/{{ rp_conf_file }}"
+rp_default: /etc/nginx/sites-enabled/default
+ufw_allow_port: "80"

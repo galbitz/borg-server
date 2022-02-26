@@ -1,0 +1,13 @@
+server {
+  listen {{ ufw_allow_port }};
+  
+  root {{ node_app_dir }};
+  
+  index index.html index.htm;
+
+  server_name _;
+
+  location / {
+    proxy_pass  http://localhost:3000;
+  }
+}

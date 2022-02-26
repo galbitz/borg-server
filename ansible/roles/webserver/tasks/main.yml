@@ -1,0 +1,6 @@
+---
+- include: harden.yml
+- include: core-packages.yml
+- include: node.yml
+- include: app.yml
+- include: firewall.yml
