@@ -14,11 +14,15 @@ root_pass ="CaeBUqTUsf2i3rW8vMAZ"
 * install ansible
 
 ## Creating Linode server
+`cd terraform`
+
 `terraform init`
 
 `terraform apply`
 
 ## Configuring server
+`cd ansible`
+
 `ansible-playbook install-webserver.yml`
 
 ## Notes
