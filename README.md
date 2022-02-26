@@ -7,8 +7,8 @@
 * create terraform/terraform.tfvars file. Template:
 ```
 token = "linode token goes here"
-authorized_keys = "previously create ssh key's public key... starting with ssh-rsa"
-root_pass ="CaeBUqTUsf2i3rW8vMAZ"
+authorized_keys = "previously create ssh key's public key goes here. starts with ssh-rsa"
+root_pass ="super secure password goes here"
 ```
 * install terraform
 * install ansible
